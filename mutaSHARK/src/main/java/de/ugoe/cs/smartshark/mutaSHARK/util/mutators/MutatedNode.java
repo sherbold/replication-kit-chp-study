@@ -2,7 +2,6 @@ package de.ugoe.cs.smartshark.mutaSHARK.util.mutators;
 
 import de.ugoe.cs.smartshark.mutaSHARK.util.TreeHelper;
 import de.ugoe.cs.smartshark.mutaSHARK.util.TreeNode;
-import de.ugoe.cs.smartshark.mutaSHARK.util.expressions.ExpressionStatement;
 
 public class MutatedNode extends TreeNode
 {

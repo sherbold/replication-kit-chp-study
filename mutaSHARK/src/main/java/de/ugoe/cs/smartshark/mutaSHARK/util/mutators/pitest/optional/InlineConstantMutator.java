@@ -2,13 +2,11 @@ package de.ugoe.cs.smartshark.mutaSHARK.util.mutators.pitest.optional;
 
 import com.github.gumtreediff.actions.model.*;
 import com.github.gumtreediff.tree.ITree;
-import com.google.common.collect.Lists;
 import de.ugoe.cs.smartshark.mutaSHARK.util.InsertWrapper;
 import de.ugoe.cs.smartshark.mutaSHARK.util.TreeHelper;
 import de.ugoe.cs.smartshark.mutaSHARK.util.TreeNode;
 import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.MutatedNode;
 import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.pitest.PitestMutator;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,13 +17,11 @@ public class InlineConstantMutator extends PitestMutator
     public List<MutatedNode> getPossibleMutations(TreeNode treeNode, TreeNode target, List<Action> actions)
     {
         List<MutatedNode> results = new ArrayList<>();
-
         results.addAll(getPossibleBooleanMutations(treeNode, actions));
         results.addAll(getPossibleIntByteShortNumberMutations(treeNode, actions));
         results.addAll(getPossibleLongNumberMutations(treeNode, actions));
         results.addAll(getPossibleFloatNumberMutations(treeNode, actions));
         results.addAll(getPossibleDoubleNumberMutations(treeNode, actions));
-
         return results;
     }
 

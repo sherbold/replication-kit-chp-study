@@ -11,6 +11,7 @@ public class PriorityQueue
     public void enqueue(SearchNode searchNode) throws TooManyActionsException
     {
         int index = 0;
+
         while (index < queue.size() && queue.get(index).getTotalCost() <= searchNode.getTotalCost())
         {
             index++;

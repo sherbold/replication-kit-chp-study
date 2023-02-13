@@ -4,11 +4,7 @@ import com.github.gumtreediff.gen.Generators;
 import com.github.gumtreediff.tree.ITree;
 import com.github.gumtreediff.tree.TreeContext;
 import de.ugoe.cs.smartshark.mutaSHARK.util.*;
-import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.TreeMutationOperator;
-import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.mujava.arithmetic.ArithmeticOperatorInsertionShortCutMutator;
-
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,19 +15,19 @@ public class MutaShark
 
     // -b|-bug path/to/bug.java -f|-fix path/to/fix.java -m|-mutator full.name.of.mutator1 full.name.of.mutator2 ...
     // path/to/bug.java path/to/fix.java  full.name.of.mutator1 full.name.of.mutator2 ...
-    // path/to/bug.java path/to/fix.java (in this case all mutatations in package util.mutators are used)
+    // path/to/bug.java path/to/fix.java (in this case all mutations in package util.mutators are used)
     public static void main(String[] args) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException, TooManyActionsException
     {
         searchResult = null;
         StartUpOptions startUpOptions = StartUpOptions.parseArgs(args);
 
-        com.github.gumtreediff.client.Run.initGenerators();
+        com.github.gumtreediff.client.Run.initGenerators(); // registers the available parsers
+
         TreeContext treeFrom = Generators.getInstance().getTree(startUpOptions.pathToFix);
         TreeContext treeTo = Generators.getInstance().getTree(startUpOptions.pathToBug);
 
-
         TreeNode toNode = getCleanedUpTree(treeTo); // new TreeNode(TreeHelper.updateTree(treeTo.getRoot()));
-        TreeNode fromNode = getCleanedUpTree(treeFrom); // new TreeNode(TreeHelper.updateTree(treeTo.getRoot()));
+        TreeNode fromNode = getCleanedUpTree(treeFrom); // new TreeNode(TreeHelper.updateTree(treeFrom.getRoot()));
         GreedySearch search = new GreedySearch(fromNode, toNode);
 
         searchResult = search.findPaths(new SearchSettings(startUpOptions.maxPathCount, startUpOptions.maxPathDepth, toNode, Arrays.asList(startUpOptions.mutations)));
@@ -80,3 +76,4 @@ public class MutaShark
         return searchResult;
     }
 }
+

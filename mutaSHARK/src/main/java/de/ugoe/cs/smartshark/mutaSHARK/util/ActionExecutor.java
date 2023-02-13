@@ -2,7 +2,6 @@ package de.ugoe.cs.smartshark.mutaSHARK.util;
 
 import com.github.gumtreediff.actions.model.*;
 import com.github.gumtreediff.tree.ITree;
-import de.ugoe.cs.smartshark.mutaSHARK.util.defects4j.Defects4JBugFix;
 import org.apache.commons.lang3.NotImplementedException;
 
 import java.util.ArrayList;

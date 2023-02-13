@@ -39,7 +39,6 @@ public class SearchPath
             edgeString.append(edge.getToSearchNode().getCurrentTreeNode().toString());
             edgeString.append(" | ");
         }
-
         return "SearchPath{" + "edges=" + edgeString + ", totalCost=" + totalCost + '}';
     }
 }
