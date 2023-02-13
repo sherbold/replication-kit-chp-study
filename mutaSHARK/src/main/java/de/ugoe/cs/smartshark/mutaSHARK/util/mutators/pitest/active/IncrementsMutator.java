@@ -5,9 +5,7 @@ import com.github.gumtreediff.tree.ITree;
 import de.ugoe.cs.smartshark.mutaSHARK.util.*;
 import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.MutatedNode;
 import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.pitest.PitestMutator;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class IncrementsMutator extends PitestMutator
