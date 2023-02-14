@@ -42,7 +42,6 @@ if (project.hasProperty('projectVersion')) {
 } else {
   project.version = findProperty('projectVersion')
 }
-
 //create a single Jar with all dependencies
 task fatJar(type: Jar) {
 	//noinspection GroovyAssignabilityCheck
