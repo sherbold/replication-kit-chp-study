@@ -40,7 +40,7 @@ Here is the list of main components of the mutaSHARK:
 
 - **Mutators:** default and optional PITest mutators' sets along with our 5 extended mutators are implemented. 
 
-- **Pathfinder:** A* algorithm is modified to find a path from fixed version to buggy version.
+- **Pathfinder:** A* algorithm is modified to find a path from the fixed version to the buggy version. 
 
 - **Data:** defects4j -- version 2.0.0 dataset is used for bug-fix pairs.
 
@@ -65,7 +65,7 @@ Steps to Set Up mutaSHARK
  <br/><br/>
 2. Click `Load` to run the gradle build script from the pop-up menu.
 
-3. Set SDK for the mutaSHARK project.
+3. Set the SDK for the mutaSHARK project.
 
 4. Assign your defects4j path to the `defects4jPath` in [mutaSHARK loader](https://github.com/sherbold/replication-kit-chp-study/blob/main/mutaSHARK/src/main/java/de/ugoe/cs/smartshark/mutaSHARK/util/defects4j/Defects4JLoader.java):
 
@@ -87,7 +87,7 @@ Using mutaSHARK
 <br/><br/>
 
 - **Description:**
-	- This example argument will try to apply the active and cheated sets of mutators on fix.java to recreate the bug.java. It will return the 1 path having least cost and the path can have maximum length of 55.
+	- This example argument will try to apply the active and cheated sets of mutators on fix.java to recreate the bug.java. It will return the 1 path having the least cost and the path can have a maximum length of 55.
 
 ## Running the mutaSHARK
 To replicate the results for each of the mutators' set i.e. default, optional and extended, before running the [Defects4JRunner.java](https://github.com/sherbold/replication-kit-chp-study/blob/main/mutaSHARK/src/main/java/de/ugoe/cs/smartshark/mutaSHARK/util/defects4j/Defects4JRunner.java), program arguments of its **MutaShark.main() method call** will be adjusted accordingly. To reproduce the results included in this replication kit the program arguments will be defined as follows:
