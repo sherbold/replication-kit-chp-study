@@ -133,7 +133,7 @@ Implementation Details
 The (important) directory structure of [mutaSHARK](https://github.com/sherbold/replication-kit-chp-study) is as follows:
 
     replication-kit-chp-study	
-       |--- mutaSHARK:									Containts source code, result files and visualizations data etc.
+       |--- mutaSHARK:			Containts source code, result files and visualizations data etc.
          |--- src
            |--- main
            	 |--- java    
