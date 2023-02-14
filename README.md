@@ -127,27 +127,25 @@ Article
 
 Implementation Details
 ----------------------
-
-[htmldocs]: http://defects4j.org/html_doc/index.html
-
 The (important) directory structure of [mutaSHARK](https://github.com/sherbold/replication-kit-chp-study) is as follows:
 
     replication-kit-chp-study	
-       |--- mutaSHARK:									Containts source code, result files and visualizations data etc.
+       |--- mutaSHARK:					Containts source code, result files and visualizations data etc.
          |--- src
            |--- main
-           	 |--- java    
-           	   |--- de
-           		 |--- ugoe  
-           		   |--- cs
-           			 |--- smartshark           	
-           			   |--- mutaSHARK
-           				 |--- MutaShark.java:			Contains the main method
-           				 |--- StartUpOptions.java:		Settings for the executor
-           				 |--- util:      			
-           				   |---defects4j: 
-           				 	 |--- Defects4JLoader.java: Defects4j dataset path
-							 |--- Defects4JRunner.java: Mutators selection and results.csv path
+             |--- java
+               |--- de
+                 |--- ugoe
+                   |--- cs
+                     |--- smartshark
+                       |--- mutaSHARK
+                         |--- MutaShark.java:		Contains the main method
+                         |--- StartUpOptions.java:		Contains settings for the executor
+                         |--- util
+                           |---defects4j
+                             |--- Defects4JLoader.java: 	Contains defects4j dataset path
+                             |--- Defects4JRunner.java: 	Contains runner arguments and results.csv path
+
            
 License
 ---------
