@@ -65,7 +65,7 @@ Steps to Set Up mutaSHARK
  <br/><br/>
 2. Click `Load` to run the gradle build script from the pop-up menu.
 
-3. Set-up SDK for the mutaSHARK project.
+3. Set SDK for the mutaSHARK project.
 
 4. Assign your defects4j path to the `defects4jPath` in [mutaSHARK loader](https://github.com/sherbold/replication-kit-chp-study/blob/main/mutaSHARK/src/main/java/de/ugoe/cs/smartshark/mutaSHARK/util/defects4j/Defects4JLoader.java):
 
