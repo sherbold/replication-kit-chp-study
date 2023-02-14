@@ -30,12 +30,9 @@ public class TreeNode
     public void removeChildAt(int index)
     {
         ArrayList<ITree> children = new ArrayList<>(tree.getChildren());
-        // if we try to remove and index which does not exist, do nothing: Alex added if statement {} but body statements were already there
-        //if(children.size() > index) {
-            children.get(index).setParent(null);
-            children.remove(index);
-            tree.setChildren(children);
-        //}
+        children.get(index).setParent(null);
+        children.remove(index);
+         tree.setChildren(children);
     }
 
     @Override
