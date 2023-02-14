@@ -138,16 +138,16 @@ The (important) directory structure of [mutaSHARK](https://github.com/sherbold/r
            |--- main
            	 |--- java    
            	   |--- de
-           		 |--- ugoe  
-           		   |--- cs
-           			 |--- smartshark           	
-           			   |--- mutaSHARK
-           				 |--- MutaShark.java:			Contains the main method
-           				 |--- StartUpOptions.java:		Settings for the executor
-           				 |--- util:      			
-           				   |---defects4j: 
-           				 	 |--- Defects4JLoader.java: Defects4j dataset path
-							 |--- Defects4JRunner.java: Mutators selection and results.csv path
+           	     |--- ugoe  
+           	       |--- cs
+           		 |--- smartshark           	
+           	           |--- mutaSHARK
+           		     |--- MutaShark.java:		Contains the main method
+           		     |--- StartUpOptions.java:		Settings for the executor
+           		     |--- util:      			
+           		       |---defects4j: 
+           		         |--- Defects4JLoader.java: 	Defects4j dataset path
+				 |--- Defects4JRunner.java: 	Mutators selection and results.csv path
            
 License
 ---------
