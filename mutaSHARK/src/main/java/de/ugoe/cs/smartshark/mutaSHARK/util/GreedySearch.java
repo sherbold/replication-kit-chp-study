@@ -4,6 +4,7 @@ import com.github.gumtreediff.actions.model.Action;
 import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.MutatedNode;
 import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.TreeMutationOperator;
 
+import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -45,7 +46,6 @@ public class GreedySearch implements ISearchAlgorithm
             }
             return new SearchResult(new ArrayList<>(foundPaths), new ArrayList<>(closestPaths));
         }
-
         if (depth >= searchSettings.maxHops)
         {
             SearchPath closest = new SearchPath(current, new DiffTree(fromNode.getTree(), toNode.getTree()).getActions().size(), new DiffTree(current.getCurrentTreeNode().getTree(), toNode.getTree()).getActions().size());
@@ -74,13 +74,20 @@ public class GreedySearch implements ISearchAlgorithm
         List<MutatedNode> possibleMutations = new ArrayList<>();
         for (TreeMutationOperator mutationOperator : searchSettings.mutationOperators)
         {
-            List<MutatedNode> operatorPossibleMutations = mutationOperator.getPossibleMutations(current.getCurrentTreeNode(), to.getCurrentTreeNode(), actions);
-            possibleMutations.addAll(operatorPossibleMutations);
+            try
+            {
+                List<MutatedNode> operatorPossibleMutations = mutationOperator.getPossibleMutations(current.getCurrentTreeNode(), to.getCurrentTreeNode(), actions);
+                possibleMutations.addAll(operatorPossibleMutations);
+            }
+            catch (Exception e)
+            {
+                //continue;
+            }
         }
         actions = null;
 
         List<SearchNode> priorityQueue = new ArrayList<>();
-        possibleMutations.sort(Comparator.comparingDouble(MutatedNode::getCost));
+        possibleMutations.sort(Comparator.comparingDouble(MutatedNode::getCost)); //cost wise application of mutators
         for (MutatedNode operatorPossibleMutation : possibleMutations)
         {
             if (priorityQueue.size() >= searchSettings.maxFoundPaths)
@@ -92,7 +99,7 @@ public class GreedySearch implements ISearchAlgorithm
         possibleMutations.clear();
         while (priorityQueue.size() > 0)
         {
-            possibleMutations.add((MutatedNode) priorityQueue.remove(0).getCurrentTreeNode());
+           possibleMutations.add((MutatedNode) priorityQueue.remove(0).getCurrentTreeNode());
         }
         for (MutatedNode possibleMutation : possibleMutations)
         {
@@ -108,10 +115,21 @@ public class GreedySearch implements ISearchAlgorithm
             }
             for (SearchPath foundPath : tempSearchResult.closestPaths)
             {
+                if(!(foundPath.remainingActionCount < foundPath.totalActionCount))
+                {
+                    SearchPath closestPath = new SearchPath(current, new DiffTree(fromNode.getTree(), toNode.getTree()).getActions().size(), new DiffTree(current.getCurrentTreeNode().getTree(), toNode.getTree()).getActions().size());
+                    if (!contains(closestPaths, closestPath))
+                    {
+                        closestPaths.add(closestPath);
+                        newPathFound = true;
+                    }
+                    return new SearchResult(new ArrayList<>(foundPaths), new ArrayList<>(closestPaths));
+                }
+
                 if (!contains(closestPaths, foundPath))
                 {
-                    closestPaths.add(foundPath);
-                    newPathFound = true;
+                        closestPaths.add(foundPath);
+                        newPathFound = true;
                 }
             }
             if (foundPaths.size() + closestPaths.size() >= searchSettings.maxFoundPaths)

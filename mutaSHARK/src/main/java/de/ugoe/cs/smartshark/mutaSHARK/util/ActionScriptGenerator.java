@@ -8,7 +8,6 @@ import com.github.gumtreediff.matchers.MappingStore;
 import com.github.gumtreediff.tree.FakeTree;
 import com.github.gumtreediff.tree.ITree;
 import com.github.gumtreediff.tree.TreeUtils;
-
 import java.util.*;
 
 public class ActionScriptGenerator implements EditScriptGenerator

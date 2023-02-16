@@ -1,6 +1,5 @@
 package de.ugoe.cs.smartshark.mutaSHARK.util;
 
-import com.github.gumtreediff.actions.EditScript;
 import com.github.gumtreediff.actions.model.Action;
 import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.MutatedNode;
 import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.TreeMutationOperator;
@@ -105,4 +104,3 @@ public class AStarSearch implements ISearchAlgorithm
         }
     }
 }
-

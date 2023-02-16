@@ -1,8 +1,8 @@
-package de.ugoe.cs.smartshark.mutaSHARK.util.mutators.pitest.active;
+package de.ugoe.cs.smartshark.mutaSHARK.util.mutators.pitest.optional;
 
 import com.github.gumtreediff.actions.model.Action;
-import com.github.gumtreediff.actions.model.Delete;
 import com.github.gumtreediff.actions.model.Insert;
+import com.github.gumtreediff.actions.model.TreeDelete;
 import com.github.gumtreediff.tree.ITree;
 import de.ugoe.cs.smartshark.mutaSHARK.util.TreeHelper;
 import de.ugoe.cs.smartshark.mutaSHARK.util.TreeNode;
@@ -11,7 +11,7 @@ import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.pitest.PitestMutator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MathMutator extends PitestMutator
+public class RemoveConditionalsMutator extends PitestMutator
 {
     @Override
     public List<MutatedNode> getPossibleMutations(TreeNode treeNode, TreeNode target, List<Action> actions)
@@ -22,31 +22,30 @@ public class MathMutator extends PitestMutator
             if (actions.get(i) instanceof Insert)
             {
                 Insert insert = (Insert) actions.get(i);
-                if (!insert.getParent().getType().name.equals("InfixExpression"))
-                {
-                    continue;
-                }
-                if (!insert.getNode().getType().name.equals("INFIX_EXPRESSION_OPERATOR"))
+                if (!insert.getNode().getType().name.equals("BooleanLiteral"))
                 {
                     continue;
                 }
                 for (int j = 0; j < actions.size(); j++)
                 {
-                    if (!(actions.get(j) instanceof Delete))
+                    //System.out.println(j+" ACTION: " + actions.get(j).getNode().getParent().getType()); //ZD
+                    if (!(actions.get(j) instanceof TreeDelete)) //ZD added TREE
                     {
                         continue;
                     }
-                    Delete delete = (Delete) actions.get(j);
+                    TreeDelete delete = (TreeDelete) actions.get(j); //ZD added TREE
+                    //System.out.println("Parent delete: " + delete.getNode().getParent() + " Parent Insert: " + insert.getParent());//ZD
                     if (delete.getNode().getParent() != insert.getParent())
                     {
                         continue;
                     }
-                    if (!delete.getNode().getType().name.equals("INFIX_EXPRESSION_OPERATOR"))
+                    if (!(delete.getNode().getType().name.equals("InfixExpression") && (delete.getNode().getChildren().get(1).getType().name.equals("INFIX_EXPRESSION_OPERATOR")) && ((delete.getNode().getChildren().get(1).getLabel().equals("==")) || ((delete.getNode().getChildren().get(1).getLabel().equals("!="))||(delete.getNode().getChildren().get(1).getLabel().equals("<"))||(delete.getNode().getChildren().get(1).getLabel().equals("<="))||(delete.getNode().getChildren().get(1).getLabel().equals(">"))||(delete.getNode().getChildren().get(1).getLabel().equals(">="))))))
                     {
                         continue;
                     }
-                    String originalLabel = delete.getNode().getLabel();
+                    String originalLabel = delete.getNode().getType().name;
                     String newLabel = insert.getNode().getLabel();
+                    //System.out.println("OLD LABEL: " + originalLabel + " New LABEL: " + newLabel);//ZD
                     if (!supportsLabelTransition(originalLabel, newLabel))
                     {
                         continue;
@@ -58,7 +57,7 @@ public class MathMutator extends PitestMutator
                     int positionInParent = delete.getNode().positionInParent();
                     newParent.removeChildAt(positionInParent);
                     newParent.getTree().insertChild(insert.getNode().deepCopy(), positionInParent);
-                    results.add(new MutatedNode(clonedTree, this, 1, "Replaced math " + originalLabel + " with " + newLabel + " @~" + delete.getNode().getPos()));
+                    results.add(new MutatedNode(clonedTree, this, 25, "Replaced " + delete.getNode().getParent().getType().name + " conditional " + originalLabel + " with " + newLabel + " @~" + delete.getNode().getPos()));
                 }
             }
         }
@@ -69,32 +68,11 @@ public class MathMutator extends PitestMutator
     {
         switch (originalLabel)
         {
-
-            case "+":
-                return newLabel.equalsIgnoreCase("-");
-            case "-":
-                return newLabel.equalsIgnoreCase("+");
-            case "*":
-                return newLabel.equalsIgnoreCase("/");
-            case "/":
-                return newLabel.equalsIgnoreCase("*");
-            case "%":
-                return newLabel.equalsIgnoreCase("*");
-            case "&":
-                return newLabel.equalsIgnoreCase("|");
-            case "|":
-                return newLabel.equalsIgnoreCase("&");
-            case "^":
-                return newLabel.equalsIgnoreCase("&");
-            case "<<":
-                return newLabel.equalsIgnoreCase(">>");
-            case ">>":
-                return newLabel.equalsIgnoreCase("<<");
-            case ">>>":
-                return newLabel.equalsIgnoreCase("<<");
+            case "InfixExpression":
+                if(newLabel.equalsIgnoreCase("true") || newLabel.equalsIgnoreCase("false")) {
+                    return true;
+                }
         }
         return false;
     }
 }
-
-

@@ -32,7 +32,7 @@ public class TreeNode
         ArrayList<ITree> children = new ArrayList<>(tree.getChildren());
         children.get(index).setParent(null);
         children.remove(index);
-        tree.setChildren(children);
+         tree.setChildren(children);
     }
 
     @Override

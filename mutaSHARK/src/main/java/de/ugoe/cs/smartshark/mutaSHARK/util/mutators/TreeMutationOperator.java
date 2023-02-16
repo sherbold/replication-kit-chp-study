@@ -1,7 +1,6 @@
 package de.ugoe.cs.smartshark.mutaSHARK.util.mutators;
 
 import com.github.gumtreediff.actions.model.Action;
-import de.ugoe.cs.smartshark.mutaSHARK.util.SearchNode;
 import de.ugoe.cs.smartshark.mutaSHARK.util.TreeNode;
 
 import java.util.List;

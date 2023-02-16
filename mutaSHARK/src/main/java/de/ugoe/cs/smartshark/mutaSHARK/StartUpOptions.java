@@ -2,7 +2,6 @@ package de.ugoe.cs.smartshark.mutaSHARK;
 
 import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.TreeMutationOperator;
 import org.reflections.Reflections;
-
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +30,10 @@ public class StartUpOptions
 
     public static StartUpOptions parseArgs(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException
     {
-        int maxPathCount = 4;
-        int maxPathDepth = 100;
-        String pathToBug = "";
-        String pathToFix = "";
+        int maxPathCount = 1;
+        int maxPathDepth = 55;
+        String pathToBug = "/home/zaheed/javawork/buggy.java";
+        String pathToFix = "/home/zaheed/javawork/fixed.java";
         List<String> mutatorPackages = new ArrayList<>();
 
         String currentParameter = "b";
@@ -86,6 +85,11 @@ public class StartUpOptions
 
         TreeMutationOperator[] treeMutationOperators = initiateTreeMutators(mutatorPackages);
 
+        //view the selected bug-fix pair, path count, path depth and tree mutation operators
+        System.out.println("Buggy File: " + pathToBug);
+        System.out.println("Fixed File: " + pathToFix);
+        System.out.println("Max Path Count: " + maxPathCount + ", Depth: " + maxPathDepth + ", Mutators: " + mutatorPackages);
+
         return new StartUpOptions(pathToBug, pathToFix, treeMutationOperators, maxPathCount, maxPathDepth);
     }
 
@@ -114,9 +118,10 @@ public class StartUpOptions
             TreeMutationOperator treeMutationOperator = (TreeMutationOperator) Class.forName(mutator).newInstance();
             result.add(treeMutationOperator);
         }
-        TreeMutationOperator[] resultArray = new TreeMutationOperator[mutators.size()];
+        TreeMutationOperator[] resultArray  = new TreeMutationOperator[mutators.size()];
         result.toArray(resultArray);
         return resultArray;
+
     }
 
 }

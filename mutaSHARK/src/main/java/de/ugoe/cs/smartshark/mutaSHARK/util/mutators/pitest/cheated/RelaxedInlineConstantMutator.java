@@ -7,7 +7,6 @@ import de.ugoe.cs.smartshark.mutaSHARK.util.TreeHelper;
 import de.ugoe.cs.smartshark.mutaSHARK.util.TreeNode;
 import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.MutatedNode;
 import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.pitest.PitestMutator;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

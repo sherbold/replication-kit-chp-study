@@ -1,4 +1,4 @@
-package de.ugoe.cs.smartshark.mutaSHARK.util.mutators.pitest.optional;
+package de.ugoe.cs.smartshark.mutaSHARK.util.mutators.pitest.active;
 
 import com.github.gumtreediff.actions.model.*;
 import com.github.gumtreediff.tree.ITree;
@@ -7,7 +7,6 @@ import de.ugoe.cs.smartshark.mutaSHARK.util.TreeHelper;
 import de.ugoe.cs.smartshark.mutaSHARK.util.TreeNode;
 import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.MutatedNode;
 import de.ugoe.cs.smartshark.mutaSHARK.util.mutators.pitest.PitestMutator;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -341,7 +340,7 @@ public class EmptyReturnsMutator extends PitestMutator
                         int positionInParent = delete.getNode().positionInParent();
                         newParent.removeChildAt(positionInParent);
                         newParent.getTree().insertChild(insert.getNode().deepCopy(), positionInParent);
-                        results.add(new MutatedNode(clonedTree, this, 25, "Replaced empty return Set " + oldLabel + " with " + newLabel + " @~" + delete.getNode().getPos()));
+                        results.add(new MutatedNode(clonedTree, this, 1, "Replaced empty return Set " + oldLabel + " with " + newLabel + " @~" + delete.getNode().getPos()));
                     }
                 }
             }
