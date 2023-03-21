@@ -72,6 +72,9 @@ public class Defects4JLoader
         {
             String buggyClassFile = findJavaFileForClassPath(buggyPath, changedClass);
             String fixedClassFile = findJavaFileForClassPath(fixedPath, changedClass);
+            //Skipp following bugs as these are skipping in extended mutators set
+            if (buggyClassFile.contains("/Jsoup/65/buggy/src/main/java/org/jsoup/parser/HtmlTreeBuilderState.java") || (buggyClassFile.contains("/Closure/95/buggy/src/com/google/javascript/jscomp/TypedScopeCreator.java")))
+                return null;
             Defects4JBugFix defects4JBugFix = new Defects4JBugFix(name, buggyClassFile, fixedClassFile);
             loadCallback.BugFixLoaded(defects4JBugFix);
             return defects4JBugFix;
